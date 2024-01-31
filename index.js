@@ -8,16 +8,11 @@ const age = {
 	year: '',
 };
 
-console.log(date);
-
 function handleChange(e) {
-	if (e.name === 'Day') age.day = e.value;
-	if (e.name === 'Month') age.month = e.value;
-	if (e.name === 'Year') age.year = e.value;
+	if (e.name === 'Day') age.day = Number(e.value) > 0 ? e.value : '';
+	if (e.name === 'Month') age.month = Number(e.value) > 0 ? e.value : '';
+	if (e.name === 'Year') age.year = Number(e.value) > 0 ? e.value : '';
 	if (age.day && age.month && age.year.length > 3) {
-		const [month, day, year] = date.split('/');
-		console.log(month, day, year);
-		console.log(age.month, age.day, age.year);
 		const yourAge = calculateAge(`${age.year}-${age.month}-${age.day}`);
 		dayResult.innerText = yourAge.days;
 		monthResult.innerText = yourAge.months;
