@@ -9,9 +9,12 @@ const age = {
 };
 
 function handleChange(e) {
-	if (e.name === 'Day') age.day = Number(e.value) > 0 ? e.value : '';
-	if (e.name === 'Month') age.month = Number(e.value) > 0 ? e.value : '';
-	if (e.name === 'Year') age.year = Number(e.value) > 0 ? e.value : '';
+	if (e.name === 'Day')
+		age.day = Number(e.value) > 0 ? (e.value <= 31 ? e.value : '') : '';
+	if (e.name === 'Month')
+		age.month = Number(e.value) > 0 ? (e.value <= 12 ? e.value : '') : '';
+	if (e.name === 'Year')
+		age.year = Number(e.value) > 0 ? (e.value >= 1900 ? e.value : '') : '';
 	if (age.day && age.month && age.year.length > 3) {
 		const yourAge = calculateAge(`${age.year}-${age.month}-${age.day}`);
 		dayResult.innerText = yourAge.days;
