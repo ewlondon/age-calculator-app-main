@@ -9,18 +9,29 @@ const age = {
 };
 
 function handleChange(e) {
-	if (e.name === 'Day')
-		age.day = Number(e.value) > 0 ? (e.value <= 31 ? e.value : '') : '';
-	if (e.name === 'Month')
-		age.month = Number(e.value) > 0 ? (e.value <= 12 ? e.value : '') : '';
-	if (e.name === 'Year')
-		age.year = Number(e.value) > 0 ? (e.value >= 1900 ? e.value : '') : '';
-	if (age.day && age.month && age.year.length > 3) {
-		const yourAge = calculateAge(`${age.year}-${age.month}-${age.day}`);
-		dayResult.innerText = yourAge.days;
-		monthResult.innerText = yourAge.months;
-		yearResult.innerText = yourAge.years;
+	if (e.name === 'Day') age.day = e.value.length > 1 ? e.value : '0' + e.value;
+	if (e.name === 'Month') age.month = e.value;
+	if (e.name === 'Year') age.year = e.value;
+	if (validDate(age)) {
+		const [yourYears, yourMonths, yourDays] = calculateAge(
+			`${age.year}-${age.month}-${age.day}`
+		);
+
+		dayResult.innerText = yourDays;
+		monthResult.innerText = yourMonths;
+		yearResult.innerText = yourYears;
+	} else {
+		dayResult.innerText = '--';
+		monthResult.innerText = '--';
+		yearResult.innerText = '--';
 	}
+}
+
+function validDate(age) {
+	if (age.day.length <= 1) return false;
+	if (age.month.length < 1) return false;
+	if (age.year.length <= 3) return false;
+	return true;
 }
 
 function calculateAge(birthdate) {
@@ -51,9 +62,5 @@ function calculateAge(birthdate) {
 		ageInDays = lastMonthDays + ageInDays;
 	}
 
-	return {
-		years: ageInYears,
-		months: ageInMonths,
-		days: ageInDays,
-	};
+	return [ageInYears, ageInMonths, ageInDays];
 }

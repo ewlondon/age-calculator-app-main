@@ -35,20 +35,29 @@
 				<input
 					oninput="handleChange(this)"
 					type="text"
+					maxlength="2"
 					aria-label="day-entry"
 					name="Day"
+					pattern="[0-9]{2}"
+					inputmode="numeric"
 				/>
 				<input
 					oninput="handleChange(this)"
 					type="text"
 					aria-label="month-entry"
 					name="Month"
+					maxlength="2"
+					pattern="[0-9]{2}"
+					inputmode="numeric"
 				/>
 				<input
 					oninput="handleChange(this)"
 					type="text"
 					aria-label="year-entry"
 					name="Year"
+					maxlength="4"
+					pattern="[0-9]{4}"
+					inputmode="numeric"
 				/>
 			</section>
 			<section>
