@@ -11,7 +11,7 @@ const age = {
 function handleChange(e) {
 	if (e.name === 'Day')
 		age.day =
-			(e.value.value > 31) | (e.value < 1)
+			(e.value > 31) | (e.value < 1)
 				? alert('Please enter digits between 1-31')
 				: e.value;
 	if (e.name === 'Month')
