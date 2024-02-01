@@ -66,7 +66,7 @@ function validDate(age) {
 	if (age.month.length < 1) return false;
 	if (age.year.length <= 3) return false;
 	return true;
-} //alidation to check that date input is of correct lengths
+}//validation to check that date input is of correct lengths
 
 function calculateAge(birthdate) {
 	const birthDateObj = new Date(birthdate);
