@@ -28,15 +28,36 @@ function handleChange(e) {
 		const [yourYears, yourMonths, yourDays] = calculateAge(
 			`${age.year}-${age.month}-${age.day}`
 		);
+		animateCountUp(dayResult,yourDays, 80);
+		animateCountUp(monthResult,yourMonths, 80);
+		animateCountUp(yearResult,yourYears, 80);
 
-		dayResult.innerText = yourDays;
-		monthResult.innerText = yourMonths;
-		yearResult.innerText = yourYears;
 	} else {
 		dayResult.innerText = '--';
 		monthResult.innerText = '--';
 		yearResult.innerText = '--';
 	}
+}
+
+function animateCountUp(inputField, targetNumber, duration) {
+	const startNumber = 0;
+	const intervalTime = Math.max(
+		10,
+		duration / Math.abs(targetNumber - startNumber)
+	); 
+	const increment = targetNumber > startNumber ? 1 : -1;
+
+	let currentNumber = startNumber;
+
+	const intervalId = setInterval(() => {
+		inputField.innerText = currentNumber;
+
+		if (currentNumber === targetNumber) {
+			clearInterval(intervalId);
+		} else {
+			currentNumber += increment;
+		}
+	}, intervalTime);
 }
 
 function validDate(age) {
