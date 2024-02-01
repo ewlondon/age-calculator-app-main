@@ -6,22 +6,23 @@ const age = {
 	day: '',
 	month: '',
 	year: '',
-};//object for storing input date
+}; //object for storing input date
 
 function handleChange(e) {
 	if (e.name === 'Day')
 		age.day =
-			(e.value > 31) | (e.value < 1)
+			(e.value > 31) | (e.value < 1 && e.value !== '')
 				? alert('Please enter digits between 1-31')
 				: e.value;
 	if (e.name === 'Month')
 		age.month =
-			(e.value > 12) | (e.value < 1)
+			(e.value > 12) | (e.value < 1 && e.value !== '')
 				? alert('Please enter digits between 1-12')
 				: e.value;
 	if (e.name === 'Year')
 		age.year =
-			(e.value.length > 3 && e.value < 1900) | (e.value > date.split('/')[2])
+			(e.value.length > 3 && e.value < 1900) |
+			(e.value > date.split('/')[2] && e.value !== '')
 				? alert('Please enter digits between 1900-' + date.split('/')[2])
 				: e.value;
 	if (validDate(age)) {
@@ -37,7 +38,7 @@ function handleChange(e) {
 		monthResult.innerText = '--';
 		yearResult.innerText = '--';
 	} // date input is invalid so we set the result to --
-}//input handling
+} //input handling
 
 function animateCountUp(inputField, targetNumber, duration) {
 	const startNumber = 0;
@@ -58,14 +59,14 @@ function animateCountUp(inputField, targetNumber, duration) {
 			currentNumber += increment;
 		}
 	}, intervalTime);
-}//animates a count up from 0 to target of input
+} //animates a count up from 0 to target of input
 
 function validDate(age) {
 	if (age.day.length <= 1) return false;
 	if (age.month.length < 1) return false;
 	if (age.year.length <= 3) return false;
 	return true;
-}//alidation to check that date input is of correct lengths
+} //alidation to check that date input is of correct lengths
 
 function calculateAge(birthdate) {
 	const birthDateObj = new Date(birthdate);
@@ -96,4 +97,4 @@ function calculateAge(birthdate) {
 	}
 
 	return [ageInYears, ageInMonths, ageInDays];
-}//calculate the age in years, months and days
+} //calculate the age in years, months and days
