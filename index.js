@@ -9,9 +9,21 @@ const age = {
 };
 
 function handleChange(e) {
-	if (e.name === 'Day') age.day = e.value.length > 1 ? e.value : '0' + e.value;
-	if (e.name === 'Month') age.month = e.value;
-	if (e.name === 'Year') age.year = e.value;
+	if (e.name === 'Day')
+		age.day =
+			(e.value.value > 31) | (e.value < 1)
+				? alert('Please enter digits between 1-31')
+				: e.value;
+	if (e.name === 'Month')
+		age.month =
+			(e.value > 12) | (e.value < 1)
+				? alert('Please enter digits between 1-12')
+				: e.value;
+	if (e.name === 'Year')
+		age.year =
+			(e.value.length > 3 && e.value < 1900) | (e.value > date.split('/')[2])
+				? alert('Please enter digits between 1900-' + date.split('/')[2])
+				: e.value;
 	if (validDate(age)) {
 		const [yourYears, yourMonths, yourDays] = calculateAge(
 			`${age.year}-${age.month}-${age.day}`
